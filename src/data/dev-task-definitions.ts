@@ -38,17 +38,17 @@ export let devTaskDefinitions = [
         "cronExpression": "0 30 1 * * *",
         "httpRequest": {
             "body": {
-                "api": "jp.smartcompany.saas.talent.service.sheet.SheetContentV2Service",
-                "method": "runTask",
+                "api": "/api/batch/sheetcontents-v2/itemmodification",
+                "method": "PUT",
                 "params": ""
             }
         },
         "activated": true,
         "id": "b614c17a-8866-40bf-9813-fca6887428d3",
         "_partition": "TaskDefinitions",
-        "_etag": "\"06004e41-0000-2300-0000-627bbd8f0000\"",
-        "type": "methodInvoke",
-        "_ts": 1652276623
+        "_etag": "\"0600bb86-0000-2300-0000-627c773d0000\"",
+        "type": "http",
+        "_ts": 1652324157
     },
     {
         "description": "時系列処理バッチ",
@@ -72,7 +72,7 @@ export let devTaskDefinitions = [
         "cronExpression": "0 25 1 * * *",
         "httpRequest": {
             "body": {
-                "api": "/api/batch/sheetcontents-v2/automaticcalculation",
+                "api": "jp.smartcompany.saas.talent.service.sheet.SheetContentV2Service",
                 "method": "PUT",
                 "params": ""
             }
@@ -80,9 +80,9 @@ export let devTaskDefinitions = [
         "activated": true,
         "id": "729eeb38-8b95-47d3-a38f-0be6299f08e0",
         "_partition": "TaskDefinitions",
-        "_etag": "\"06007283-0000-2300-0000-627c6d8a0000\"",
-        "type": "http",
-        "_ts": 1652321674
+        "_etag": "\"0600ca86-0000-2300-0000-627c77640000\"",
+        "type": "methodInvoke",
+        "_ts": 1652324196
     },
     {
         "description": "Member4Search全量接口",
