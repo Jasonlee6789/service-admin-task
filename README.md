@@ -6,7 +6,7 @@
 
 ### 第一步:通过get dev小区的/api/curd/TaskDefinitions?query={"offset":0,"limit":100}接口
 
-把这接口返回的json放到项目的src/data/dev-task=definitions.ts中.
+把这接口返回的json放到项目的src/data/dev-task-definitions.ts中.
 
 这一步的主要目的是为了把dev小区的task definitions的json配置作为一个参考标准
 
