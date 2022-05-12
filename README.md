@@ -2,9 +2,7 @@
 
 ## 原理:
 
-## 准备工作:
-
-先配置好dev小区. 测试通过后.
+ 准备工作: 先配置好dev小区. 测试通过后.
 
 ### 第一步:通过get dev小区的/api/curd/TaskDefinitions?query={"offset":0,"limit":100}接口
 
