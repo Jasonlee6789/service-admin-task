@@ -1,14 +1,10 @@
-// https://service-admin-dev.smartcompany.dev/taskDefinitions/?page=1&pageSize=100
-
-let host = "https://smartcompany-admin-dev.azurewebsites.net";
-
-let devTaskDefinitions = [{
+export let devTaskDefinitions = [{
     "description": "人事評価form定義自動修正 RPC API",
     "cronExpression": "0 35 1 * * *",
     "type": "methodInvoke",
     "httpRequest": {
         "body": {
-            "api": "jp.smartcompany.saas.talent.service.assessment.AssessmentFormService",
+            "api": "jp.co.nisshinsci.saas.framework.service.tags.Member4SearchService",
             "method": "runTask",
             "params": "{}"
         }
@@ -23,7 +19,7 @@ let devTaskDefinitions = [{
     "cronExpression": "0 20 1 * * *",
     "httpRequest": {
         "body": {
-            "api": "jp.smartcompany.saas.talent.service.ai.AIRawDataService.AIRawDataService",
+            "api": "jp.smartcompany.saas.talent.service.ai.AIRawDataService",
             "method": "runTask",
             "params": "{}"
         }
@@ -39,7 +35,7 @@ let devTaskDefinitions = [{
     "cronExpression": "0 30 1 * * *",
     "httpRequest": {
         "body": {
-            "api": "jp.smartcompany.saas.talent.service.sheet.SheetContentV2Service", "method": "runTask", "params": ""
+            "api": "jp.co.nisshinsci.saas.framework.service.form.SheetContentV2Service", "method": "runTask", "params": ""
         }
     },
     "activated": true,
@@ -53,7 +49,7 @@ let devTaskDefinitions = [{
     "cronExpression": "0 0 2 * * *",
     "httpRequest": {
         "body": {
-            "api": "jp.smartcompany.saas.talent.service.timeseries.TimeSeriesTaskService",
+            "api": "jp.co.nisshinsci.saas.framework.service.timeseries.TimeSeriesTaskService",
             "method": "runTask",
             "params": ""
         }
@@ -101,7 +97,7 @@ let devTaskDefinitions = [{
     "cronExpression": "0 5 1 * * *",
     "httpRequest": {
         "body": {
-            "api": "jp.smartcompany.saas.talent.service.objectives.ProgressSnapshotService",
+            "api": "jp.co.nisshinsci.saas.framework.service.objectives.ProgressSnapshotService",
             "method": "runTask",
             "params": ""
         }
@@ -117,7 +113,7 @@ let devTaskDefinitions = [{
     "cronExpression": "0 10 1 * * *",
     "httpRequest": {
         "body": {
-            "api": "jp.smartcompany.saas.talent.service.objectives.MemberWithObjectiveService",
+            "api": "jp.co.nisshinsci.saas.framework.service.objectives.MemberWithObjectiveService",
             "method": "runTask",
             "params": ""
         }
@@ -143,58 +139,3 @@ let devTaskDefinitions = [{
     "type": "methodInvoke",
     "_ts": 1652175912
 }]
-
-function setUrl(url) {
-    return `${host}${url}`;
-}
-
-async function GET(url) {
-    const response = await fetch(setUrl(url), {
-        method: 'GET',
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
-
-}
-
-async function PUT(url, data) {
-    new Promise((resolve, reject) => {
-        const response = fetch(setUrl(url), {
-            method: 'PUT', headers: {
-                'Content-Type': 'application/json',
-            }, body: JSON.stringify(data),
-        }).then(response => {
-            resolve("ok");
-        })
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-
-    })
-
-}
-
-function getAyncDefinitions(tasksDefinitions, item) {
-    for (let {description, cronExpression, httpRequest, activated} of devTaskDefinitions) {
-        if (item.description.includes(description)) {
-            item.cronExpression = cronExpression;
-            item.httpRequest = httpRequest;
-            item.activated = activated;
-            return item;
-        }
-    }
-}
-
-async function syncTasksDefinitions() {
-    let tasksDefinitions = await GET(`/api/curd/TaskDefinitions?query={"offset":0,"limit":100}`);
-    for (let item of tasksDefinitions) {
-        await PUT('/api/curd/TaskDefinitions', getAyncDefinitions(tasksDefinitions, item));
-    }
-}
-
-(async function () {
-    await syncTasksDefinitions();
-})();
-
