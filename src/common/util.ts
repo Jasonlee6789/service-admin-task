@@ -30,7 +30,7 @@ export async function PUT(url: string, data: any = {}) {
 
 export function getAyncDefinitions(tasksDefinitions: any, item: any) {
     for (let {description, cronExpression, httpRequest, activated,type} of devTaskDefinitions) {
-        if (item.description.includes(description)) {
+        if (item.description==description) {
             item.cronExpression = cronExpression;
             item.httpRequest = httpRequest;
             item.activated = activated;
