@@ -38,17 +38,17 @@ export let devTaskDefinitions = [
         "cronExpression": "0 30 1 * * *",
         "httpRequest": {
             "body": {
-                "api": "/api/batch/sheetcontents-v2/itemmodification",
-                "method": "PUT",
-                "params": ""
+                "api": "jp.smartcompany.saas.talent.service.sheet.SheetContentV2Service",
+                "method": "runTask2",
+                "params": "{}"
             }
         },
         "activated": true,
         "id": "b614c17a-8866-40bf-9813-fca6887428d3",
         "_partition": "TaskDefinitions",
-        "_etag": "\"06006c99-0000-2300-0000-627cac3b0000\"",
-        "type": "http",
-        "_ts": 1652337723
+        "_etag": "\"07001616-0000-2300-0000-627e0b740000\"",
+        "type": "methodInvoke",
+        "_ts": 1652427636
     },
     {
         "description": "時系列処理バッチ",
